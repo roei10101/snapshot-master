@@ -1,0 +1,48 @@
+name: Web App CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: # מאפשר להריץ ידנית
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Use Node.js 20
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Run Tests
+      run: npm test
+
+    - name: Build App
+      run: npm run build
+
+    - name: Upload Production Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: production-build
+        path: |
+          dist
+          build
+          out
+          # שים פה את תיקיית הבילד לפי הפרויקט שלך
+
+    # אם אתה רוצה גם לפרוס לשרת (למשל FTP / SSH / GitHub Pages), הוסף שלב נוסף כאן
+    # לדוגמה, לפריסה ל־GitHub Pages:
+    # - name: Deploy to GitHub Pages
+    #   uses: peaceiris/actions-gh-pages@v4
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     publish_dir: ./build
