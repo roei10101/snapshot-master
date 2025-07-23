@@ -8193,7 +8193,7 @@ strong {
 
 .navbar .nav-menu li {
   position: relative;
-  min-width: 200px;
+  min-width: 100px;
   text-align: right; }
 
 .navbar .nav-menu li .dot {
@@ -8302,7 +8302,7 @@ strong {
 
 .navbar-2 .nav-menu li {
   position: relative;
-  min-width: 200px;
+  min-width: 100px;
   text-align: right; }
 
 .navbar-2 .nav-menu li .dot {
